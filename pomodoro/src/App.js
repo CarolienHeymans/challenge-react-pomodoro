@@ -62,6 +62,16 @@ class App extends React.Component {
     }
 
     render() {
+
+let button;
+if(this.state.timerStopped){
+button = <button
+onClick={this
+.handleTimerStart
+.bind(this)}>Start Timer</button>;
+}else{
+button = <button onClick={this.handleReset.bind(this)}>Reset</button>;
+} 
         return (
             <div className="container">
                 <h2 className="text-center">Tomato Timer</h2>
@@ -74,10 +84,7 @@ class App extends React.Component {
                             {"Seconds: " + this.state.seconds}</div>
                     </div>
                     <div className="timer-controls">
-                        <button
-                            onClick={this
-                            .handleTimerStart
-                            .bind(this)}>Start Timer</button>
+                        {button}
                         <button
                             onClick={this
                             .handleTimerStop
@@ -90,10 +97,7 @@ class App extends React.Component {
                             onClick={this
                             .handleMinTime
                             .bind(this)}>-</button>
-                        <button
-                            onClick={this
-                            .handleReset
-                            .bind(this)}>Reset</button>
+                       
                     </div>
 
                 </div>
