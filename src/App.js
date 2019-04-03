@@ -1,6 +1,7 @@
 // eslint-disable-next-line
 import React, { Component } from 'react';
 import './App.css';
+import './fallingtomatoes.mp4';
 
 class App extends React.Component {
 	constructor(props) {
@@ -23,9 +24,11 @@ class App extends React.Component {
 	handleTimerStart(e) {
 		e.preventDefault();
 		if (this.state.timerStopped) {
+			//start button only works if not counting down
 			this.timer = setInterval(() => {
 				this.setState({ timerStarted: true, timerStopped: false });
 				if (this.state.timerStarted) {
+					//count down when press start button
 					if (this.state.seconds === 0) {
 						this.setState((prevState) => ({
 							minutes: prevState.minutes - 1,
@@ -35,6 +38,7 @@ class App extends React.Component {
 					this.setState((prevState) => ({
 						seconds: prevState.seconds - 1
 					}));
+					//alert if timer is done
 					if (this.state.minutes === 0 && this.state.seconds === 0) {
 						alert('take a break!');
 						this.handleReset();
@@ -45,6 +49,7 @@ class App extends React.Component {
 	}
 
 	handlePlusTime() {
+		//add minutes to timer
 		if (this.state.timerStopped) {
 			this.setState({
 				minutes: this.state.minutes + 1
@@ -52,6 +57,7 @@ class App extends React.Component {
 		}
 	}
 	handleMinTime() {
+		//substract minutes from timer
 		if (this.state.timerStopped) {
 			this.setState({
 				minutes: this.state.minutes - 1
@@ -60,8 +66,10 @@ class App extends React.Component {
 	}
 
 	render() {
+		//render the clock + buttons
 		let button;
 		if (this.state.timerStopped) {
+			//switch between start and reset button
 			button = (
 				<button className="btn btn-primary" onClick={this.handleTimerStart.bind(this)}>
 					<i className="fas fa-play" />
@@ -75,7 +83,6 @@ class App extends React.Component {
 			);
 		}
 		return (
-			/* <!-- The video --> */
 			<div className="container">
 				<h2 className="text-center">Pomodoro Timer</h2>
 				<div className="timer-container">
