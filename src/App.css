@@ -1,4 +1,5 @@
 .container {
+	margin: 15px;
 	box-sizing: border-box;
 	text-align: center;
 	justify-content: center;
@@ -47,7 +48,7 @@
 
 .clock {
 	display: flex;
-
+	font-family: 'Orbitron', sans-serif;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
