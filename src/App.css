@@ -1,8 +1,9 @@
 .container {
+	box-sizing: border-box;
 	text-align: center;
 	justify-content: center;
-	flex-direction: column;
-	background-color: rgba(247, 235, 235, 0.5);
+	flex-direction: row;
+
 }
 
 .timer-container {
@@ -14,16 +15,18 @@
 
 .current-timer {
 	border: 2px solid rgb(5, 14, 39);
-	border-radius: 50%;
-	padding: 20px;
+	border-radius: 60%;
+	padding: 50px;
+	margin: 10px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	font-size: 40px;
+	background-color: rgb(255, 255, 255);
 }
 
 .controls {
-	padding: 10px;
+	padding: 5px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
@@ -31,7 +34,24 @@
 }
 
 .timer-controls {
-	padding: 10px;
+	padding: 5px;
 	display: flex;
 	justify-content: center;
+	align-items: center;
+}
+
+.btn-secondary {
+	display: flex;
+	height: 50px;
+}
+
+.clock {
+	display: flex;
+
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+	align-items: center;
+
+
 }
