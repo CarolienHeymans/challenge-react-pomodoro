@@ -64,37 +64,38 @@ class App extends React.Component {
 		if (this.state.timerStopped) {
 			button = (
 				<button className="btn btn-primary" onClick={this.handleTimerStart.bind(this)}>
-					Start Timer
+					<i className="fas fa-play" />
 				</button>
 			);
 		} else {
 			button = (
 				<button className="btn btn-primary" onClick={this.handleReset.bind(this)}>
-					Reset
+					<i className="fas fa-undo-alt" />
 				</button>
 			);
 		}
 		return (
+			/* <!-- The video --> */
 			<div className="container">
 				<h2 className="text-center">Pomodoro Timer</h2>
 				<div className="timer-container">
 					<div className="timer-controls">
 						<button className="btn btn-secondary" onClick={this.handlePlusTime.bind(this)}>
-							+
+							<i className="fas fa-plus" />
 						</button>
 					</div>
 					<div className="current-timer">{this.state.minutes + ':' + this.state.seconds}</div>
 
 					<div className="timer-controls">
 						<button className="btn btn-secondary" onClick={this.handleMinTime.bind(this)}>
-							-
+							<i className="fas fa-minus" />
 						</button>
 					</div>
 				</div>
-				<div className="controls">
+				<div className="controls btn-group btn-group-toggle" data-toggle="buttons">
 					{button}
 					<button className="btn btn-primary" onClick={this.handleTimerStop.bind(this)}>
-						Stop Timer
+						<i className="fas fa-stop" />
 					</button>
 				</div>
 			</div>
