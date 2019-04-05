@@ -1,8 +1,14 @@
 // eslint-disable-next-line
 import React, { Component } from 'react';
 import './App.css';
-import './fallingtomatoes.mp4';
+import alarmSound from './churchchimedanielsimon.mp3';
+import Sound from 'react-sound';
 
+class Alert extends React.Component {
+	render() {
+		return <Sound url={alarmSound} playStatus={this.props.playing} />;
+	}
+}
 class App extends React.Component {
 	constructor(props) {
 		super(props);
@@ -10,16 +16,29 @@ class App extends React.Component {
 			timerStarted: false,
 			timerStopped: true,
 			minutes: 25,
-			seconds: 0
+			seconds: 0,
+			alarmStatus: Sound.status.STOPPED
 		};
 	}
+
 	handleReset() {
-		this.setState({ timerStarted: false, timerStopped: true, seconds: 0, minutes: 25 });
+		this.setState({
+			timerStarted: false,
+			timerStopped: true,
+			seconds: 0,
+			minutes: 25
+		});
 		clearInterval(this.timer);
 	}
 	handleTimerStop() {
-		this.setState({ timerStarted: false, timerStopped: true });
+		this.setState({ timerStarted: false, timerStopped: true, alarmStatus: Sound.status.STOPPED });
 		clearInterval(this.timer);
+	}
+
+	handleAlert() {
+		this.setState({ alarmStatus: Sound.status.PLAYING });
+		//alert('Take a break!');
+		this.handleReset();
 	}
 	handleTimerStart(e) {
 		e.preventDefault();
@@ -40,8 +59,7 @@ class App extends React.Component {
 					}));
 					//alert if timer is done
 					if (this.state.minutes === 0 && this.state.seconds === 0) {
-						alert('take a break!');
-						this.handleReset();
+						this.handleAlert();
 					}
 				}
 			}, 1000);
@@ -67,23 +85,26 @@ class App extends React.Component {
 
 	render() {
 		//render the clock + buttons
-		let button;
+
+		let buttonSwitch;
 		if (this.state.timerStopped) {
-			//switch between start and reset button
-			button = (
+			//play button hidden when counting
+			buttonSwitch = (
 				<button className="btn btn-success" onClick={this.handleTimerStart.bind(this)}>
 					<i className="fas fa-play" />
 				</button>
 			);
 		} else {
-			button = (
-				<button className="btn btn-info" onClick={this.handleReset.bind(this)}>
-					<i className="fas fa-undo-alt" />
+			buttonSwitch = (
+				<button className="hidden" onClick={this.handleTimerStart.bind(this)}>
+					<i className="fas fa-play" />
 				</button>
 			);
 		}
+
 		return (
 			<div className="container">
+				<Alert playing={this.state.alarmStatus} />
 				<div className="clock">
 					<h2 className="text-center">Pomodoro Timer</h2>
 					<div className="timer-container">
@@ -101,9 +122,12 @@ class App extends React.Component {
 						</div>
 					</div>
 					<div className="controls btn-group btn-group-toggle" data-toggle="buttons">
-						{button}
+						{buttonSwitch}
 						<button className="btn btn-danger" onClick={this.handleTimerStop.bind(this)}>
 							<i className="fas fa-stop" />
+						</button>
+						<button className="btn btn-info" onClick={this.handleReset.bind(this)}>
+							<i className="fas fa-undo-alt" />
 						</button>
 					</div>
 				</div>

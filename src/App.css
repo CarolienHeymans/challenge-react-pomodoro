@@ -7,6 +7,10 @@
 
 }
 
+.hidden {
+	display: none;
+}
+
 .timer-container {
 	display: flex;
 	justify-content: center;
